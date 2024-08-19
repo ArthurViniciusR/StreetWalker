@@ -15,14 +15,14 @@ export default function Index() {
       <View style={styles.navigator}>
   
           <View style={styles.label}>
+            <Link href={"/treino"}>
             <TouchableOpacity style={styles.navBtn}>
-              <Link href={"/treino"}>
                 <Image
                   source={require("@/assets/images/treino.png")}
                   style={styles.btnIcon}
                 />
-              </Link>
             </TouchableOpacity>
+            </Link>
           <Text style={styles.labeltxt}>Treino</Text>
           </View>
         
