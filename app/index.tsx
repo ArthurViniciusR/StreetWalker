@@ -28,12 +28,14 @@ export default function Index() {
         
 
         <View  style={styles.label}>
-          <TouchableOpacity style={styles.navBtn}>
-            <Image
-              source={require("@/assets/images/agua.png")}
-              style={styles.btnIcon}
-            />
-        </TouchableOpacity>
+          <Link href={"/agua"}>
+            <TouchableOpacity style={styles.navBtn}>
+              <Image
+                source={require("@/assets/images/agua.png")}
+                style={styles.btnIcon}
+              />
+            </TouchableOpacity>
+          </Link>
         <Text style={styles.labeltxt}>Agua</Text>
         </View>
 
