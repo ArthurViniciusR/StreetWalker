@@ -23,9 +23,11 @@ export default function LoginScreen() {
          secureTextEntry
        />
      </View>
+      <Link href={"/cadastro"}>
      <TouchableOpacity>
-       <Text style={styles.signupText}>não tem login? cadastre-se</Text>
+        <Text style={styles.signupText}>não tem login? cadastre-se</Text>
      </TouchableOpacity>
+      </Link>
      <TouchableOpacity style={styles.button}>
        <Link href={"/"}>
         <Text style={styles.buttonText}>Entrar</Text>
@@ -79,6 +81,7 @@ const styles = StyleSheet.create({
    paddingVertical: 15,
    borderRadius: 8,
    alignItems: 'center',
+   marginTop: 20
  },
  buttonText: {
    color: '#fff',

@@ -1,5 +1,6 @@
 import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View,  } from "react-native";
+import * as Progress from 'react-native-progress';
 
 export default function Index() {
   return (
@@ -40,12 +41,14 @@ export default function Index() {
         </View>
 
         <View  style={styles.label}>
-          <TouchableOpacity style={styles.navBtn}>
-            <Image
-              source={require("@/assets/images/historico.png")}
-              style={styles.btnIcon}
-            />
-        </TouchableOpacity>
+          <Link href={"/historico"}>
+            <TouchableOpacity style={styles.navBtn}>
+              <Image
+                source={require("@/assets/images/historico.png")}
+                style={styles.btnIcon}
+              />
+          </TouchableOpacity>
+          </Link>
         <Text style={styles.labeltxt}>Historico</Text>
         </View>
 
@@ -58,7 +61,7 @@ export default function Index() {
 
       <View style={styles.progressInfo}>
         <Text style={styles.labelTopProgress}>Meta Diaria</Text>
-        <View style={styles.progress}></View>
+        <Progress.Bar progress={0.7} width={200}/>
         <Text style={styles.labelBotProgress}>você já deve ter bebido 2000ml de água</Text>
       </View>
 
@@ -123,8 +126,8 @@ const styles = StyleSheet.create({
   },
 
   btnIcon:{
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     resizeMode: 'contain',
   },
 
@@ -139,14 +142,6 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: -50,
     gap: 5
-  },
-
-  progress:{
-    alignItems: "center",
-    width: "80%",
-    height: 30,
-    borderRadius: 30,
-    backgroundColor: "#0284C7",
   },
 
   labelTopProgress:{
