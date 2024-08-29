@@ -1,6 +1,30 @@
+import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function Agua() {
+
+  const [idade, setIdade] = useState<number>(0);
+  const [peso, setPeso] = useState<number>(0);
+  const [totalConsumo, setTotalConsumo] = useState(0)
+
+  const handleIdadeChange = (input: string) => {
+    const numericValue = parseFloat(input);
+    setIdade(numericValue);
+  };
+
+  const handlePesoChange = (input: string) => {
+    const numericValue = parseFloat(input);
+    setPeso(numericValue);
+  };
+
+  const CalcAgua = () => {
+    if(idade <= 17){
+      setTotalConsumo(40*peso)
+    } else {
+      setTotalConsumo(35*peso)
+    }
+  }
+  
   return (
     <View style={styles.container}>
 
@@ -13,23 +37,26 @@ export default function Agua() {
             placeholder="Idade: 18"
             keyboardType="numeric"
             placeholderTextColor={"#444444"}
+            onChangeText={handleIdadeChange} 
         />
         <TextInput
             style={styles.input}
             placeholder="Peso: 70kg"
             keyboardType="numeric"
             placeholderTextColor={"#444444"}
+            onChangeText={handlePesoChange}
         />
 
         <TouchableOpacity
-            style={styles.buttonCalc}
+          onPress={CalcAgua}
+          style={styles.buttonCalc}
         >
             <Text style={styles.btnText}>Calcular litros por dia</Text>
         </TouchableOpacity>
 
         <View style={styles.resultContain}>
             <Text style={styles.meta}>sua meta diária</Text>
-            <Text style={styles.resultMeta}>3000ml</Text>     
+            <Text style={styles.resultMeta}>{totalConsumo}ml</Text>     
         </View>
         
 
