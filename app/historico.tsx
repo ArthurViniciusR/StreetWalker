@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
-const App = () => {
+export default function Historico() {
   return (
     <ScrollView style={styles.container}>
     
@@ -116,5 +116,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default App;

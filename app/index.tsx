@@ -1,8 +1,29 @@
 import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View,  } from "react-native";
 import * as Progress from 'react-native-progress';
+import { useProgress } from '../context/ProgressContext';
+import { useEffect, useState } from "react";
 
 export default function Index() {
+
+  const { totalConsumo } = useProgress();
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // Função que incrementa o progresso a cada segundo
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        // Incrementa o progresso em 0.05 a cada segundo
+        const nextProgress = prev + 0.05;
+        // Reinicia a barra quando atingir 1
+        return nextProgress >= 1 ? 0 : nextProgress;
+      });
+    }, 1000); // 1000ms = 1 segundo
+
+    // Limpa o intervalo ao desmontar o componente
+    return () => clearInterval(interval);
+  }, []);
+  
   return (
     <View style={styles.container}>
       <View style={styles.infokm}>
@@ -61,8 +82,8 @@ export default function Index() {
 
       <View style={styles.progressInfo}>
         <Text style={styles.labelTopProgress}>Meta Diaria</Text>
-        <Progress.Bar progress={0.7} width={200}/>
-        <Text style={styles.labelBotProgress}>você já deve ter bebido 2000ml de água</Text>
+        <Progress.Bar progress={progress} width={250} height={15}/>
+        <Text style={styles.labelBotProgress}>você deve beber {totalConsumo}ml de água</Text>
       </View>
 
     </View>
