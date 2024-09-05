@@ -1,14 +1,22 @@
 import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View,  } from "react-native";
 import * as Progress from 'react-native-progress';
-import { useProgress } from '../context/ProgressContext';
 import { useEffect, useState } from "react";
+import { useNavigation } from '@react-navigation/native'
 
 export default function Index() {
 
-  const { totalConsumo } = useProgress();
   const [progress, setProgress] = useState(0);
+  const [totalConsumo, setTotalConsumo] = useState<number>(0);
 
+  useEffect(() => {
+    // Recupera o totalConsumo do localStorage ao montar o componente
+    const storedTotalConsumo = localStorage.getItem('totalConsumo');
+    if (storedTotalConsumo) {
+      setTotalConsumo(parseFloat(storedTotalConsumo));
+    }
+  }, []);
+  
   useEffect(() => {
     // Função que incrementa o progresso a cada segundo
     const interval = setInterval(() => {
@@ -23,6 +31,8 @@ export default function Index() {
     // Limpa o intervalo ao desmontar o componente
     return () => clearInterval(interval);
   }, []);
+
+  const navigation = useNavigation();
   
   return (
     <View style={styles.container}>
@@ -83,7 +93,7 @@ export default function Index() {
       <View style={styles.progressInfo}>
         <Text style={styles.labelTopProgress}>Meta Diaria</Text>
         <Progress.Bar progress={progress} width={250} height={15}/>
-        <Text style={styles.labelBotProgress}>você deve beber {totalConsumo}ml de água</Text>
+        <Text style={styles.labelBotProgress}>você deve beber {totalConsumo} ml de água</Text>
       </View>
 
     </View>
