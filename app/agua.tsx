@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useProgress } from '../context/ProgressContext';
 
 export default function Agua() {
 
   const [idade, setIdade] = useState<number>(0);
   const [peso, setPeso] = useState<number>(0);
-  const [totalConsumo, setTotalConsumo] = useState(0)
+  const { totalConsumo, setTotalConsumo } = useProgress();
 
   const handleIdadeChange = (input: string) => {
     const numericValue = parseFloat(input);
