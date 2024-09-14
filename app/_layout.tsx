@@ -1,10 +1,9 @@
 import {Stack, Tabs} from "expo-router";
-import { ProgressProvider } from '../context/ProgressContext';
 
 
 export default function RootLayout() {
+  
   return (
-    <ProgressProvider>
         <Stack screenOptions={{
           headerShown: false
         }}>
@@ -13,6 +12,5 @@ export default function RootLayout() {
           <Stack.Screen name="treino"/>
           <Stack.Screen name="agua"/>
         </Stack>
-    </ProgressProvider>
   );
 }

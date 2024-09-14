@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 
-export default function App() {
+export default function Treino() {
  return (
    <View style={styles.container}>
      <Image

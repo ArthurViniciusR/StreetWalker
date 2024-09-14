@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useProgress } from '../context/ProgressContext';
 
 export default function Agua() {
 
   const [idade, setIdade] = useState<number>(0);
   const [peso, setPeso] = useState<number>(0);
-  const { totalConsumo, setTotalConsumo } = useProgress();
+  const [totalConsumo, setTotalConsumo] = useState(0);
+
+  useEffect(() => {
+    // Recupera o totalConsumo do localStorage ao montar o componente
+    const storedTotalConsumo = localStorage.getItem('totalConsumo');
+    if (storedTotalConsumo) {
+      setTotalConsumo(parseFloat(storedTotalConsumo));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Armazena o totalConsumo no localStorage sempre que ele muda
+    localStorage.setItem('totalConsumo', totalConsumo.toString());
+  }, [totalConsumo]);
 
   const handleIdadeChange = (input: string) => {
     const numericValue = parseFloat(input);
