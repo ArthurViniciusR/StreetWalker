@@ -1,4 +1,4 @@
-import {Stack, Tabs} from "expo-router";
+import {Stack} from "expo-router";
 
 
 export default function RootLayout() {
@@ -7,10 +7,12 @@ export default function RootLayout() {
         <Stack screenOptions={{
           headerShown: false
         }}>
-          <Stack.Screen name="login"/>
           <Stack.Screen name="index"/>
+          <Stack.Screen name="cadastro"/>
+          <Stack.Screen name="home"/>
           <Stack.Screen name="treino"/>
           <Stack.Screen name="agua"/>
+          <Stack.Screen name="historico"/>
         </Stack>
   );
 }

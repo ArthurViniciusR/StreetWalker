@@ -1,23 +1,37 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Agua() {
-
   const [idade, setIdade] = useState<number>(0);
   const [peso, setPeso] = useState<number>(0);
   const [totalConsumo, setTotalConsumo] = useState(0);
 
   useEffect(() => {
-    // Recupera o totalConsumo do localStorage ao montar o componente
-    const storedTotalConsumo = localStorage.getItem('totalConsumo');
-    if (storedTotalConsumo) {
-      setTotalConsumo(parseFloat(storedTotalConsumo));
-    }
+    // Recupera o totalConsumo do AsyncStorage ao montar o componente
+    const loadTotalConsumo = async () => {
+      try {
+        const storedTotalConsumo = await AsyncStorage.getItem('totalConsumo');
+        if (storedTotalConsumo) {
+          setTotalConsumo(parseFloat(storedTotalConsumo));
+        }
+      } catch (error) {
+        console.log("Erro ao carregar dados:", error);
+      }
+    };
+    loadTotalConsumo();
   }, []);
 
   useEffect(() => {
-    // Armazena o totalConsumo no localStorage sempre que ele muda
-    localStorage.setItem('totalConsumo', totalConsumo.toString());
+    // Armazena o totalConsumo no AsyncStorage sempre que ele muda
+    const saveTotalConsumo = async () => {
+      try {
+        await AsyncStorage.setItem('totalConsumo', totalConsumo.toString());
+      } catch (error) {
+        console.log("Erro ao salvar dados:", error);
+      }
+    };
+    saveTotalConsumo();
   }, [totalConsumo]);
 
   const handleIdadeChange = (input: string) => {
